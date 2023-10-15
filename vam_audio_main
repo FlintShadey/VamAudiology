@@ -1,0 +1,74 @@
+# %%
+import re
+import pytesseract
+from pdf2image import convert_from_path
+import csv
+
+# %%
+def pdf_to_text(pdf_path):
+    pages = convert_from_path(pdf_path, dpi=300)
+    all_text = ''
+    for page in pages:
+        all_text += pytesseract.image_to_string(page)
+    return all_text
+
+# %%
+
+def clean(item):
+    return item.strip().replace('O', '0')
+
+def capture_data(text):
+    import re
+    
+    # Capture name
+    name_pattern = r'(\w+), (\w+)'
+    name_match = re.search(name_pattern, text)
+    last_name, first_name = name_match.groups()
+
+    # Capture hearing test results
+    results_pattern = r'(\d{1,2}/ ?\d{1,2}/\d{4}) \d{1,2}:\d{2}:\d{2} (\d+|O) (\d+|O) (\d+|O) (\d+|O) (\d+|O) (\d+|O) (\d+|O)'
+    results_matches = re.findall(results_pattern, text)
+
+    # Organize the results
+    data = []
+    sides = ['Left', 'Right']
+    for i, result in enumerate(results_matches):
+        row = [last_name, first_name]
+        # Clean the hearing test results
+        cleaned_result = [clean(item) for item in result]
+        row.extend(cleaned_result)
+        row.insert(3, sides[i % 2])  # Alternate between 'Left' and 'Right'
+        data.append(row)
+    print(data)
+    return data
+
+
+# %% [markdown]
+# <span style="color: green; font-size: 30px;">                           Option + Right Click to get the Path </span>
+# 
+
+# %%
+pdf_path = input("What is the path to the PDF: ")
+
+extracted_text = pdf_to_text(pdf_path)
+captured_data = capture_data(extracted_text)
+
+
+# %%
+# Export the captured data to a CSV file
+csv_filename = "captured_data.csv"
+with open(csv_filename, 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    # Write data
+    csvwriter.writerows(captured_data)
+
+totalResult = pdf_to_text(pdf_path)
+print(totalResult)
+
+
+# %% [markdown]
+# 
+# <span style="color: green; font-size: 30px;">Visually inspect and correct captured_data.csv then proceed to append_db</span>
+# 
+
+

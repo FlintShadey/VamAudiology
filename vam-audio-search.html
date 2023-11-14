@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VAM search</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+    
+
+    <div class="container-fluid">
+        <nav class="navbar row justify-content-around fixed-top" style="background-color: #e3f2fd;">
+            <div class="container-fluid justify-content">
+                <a class="navbar-brand ps-3" href="#">
+                    <img src="/bootstrap-tutorial/POD_LOGO_transparent.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-center">
+                  </a>
+                  <div class="justify-content-center">
+                    <h1 class="mb-0 text-primary d-none d-md-block">Provider on Demand - Insider</h1>
+                </div>
+    
+              <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      VAM Audiology Data
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Add Data</a></li>
+                      <li><a class="dropdown-item" href="#">Search</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Download Entire dataset</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" aria-disabled="true">LOGOUT</a>
+                  </li>
+                </ul>
+    
+              </div>
+            </div>
+          </nav>
+    </div>
+        
+    <h2>Tabs</h2>
+<div class="container">
+<!-- NEED mt-5 justify-content-center  -->
+    
+<ul class="nav nav-pills mt-5 justify-content-center ">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Search</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Add Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">Download</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link disabled" aria-disabled="true">Back</a>
+    </li>
+  </ul>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-md">
+            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+        </div>
+        <div class="col-12 col-md">
+            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+        </div>
+        <div class="col-12 col-md">
+            <input type="date" class="form-control" placeholder="Date of Birth" aria-label="Date of Birth">
+        </div>
+    </div>        
+</div>
+
+
+<div class="container mt-5 d-flex justify-content-end">
+    <input class="btn btn-primary btn-lg" type="search" value="Search">
+</div>
+        <!-- -------------------------------------------------   -->
+
+        <script src="js/bootstrap.bundle.js"></script>
+</body>
+</html>

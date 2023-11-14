@@ -50,10 +50,12 @@
             </div>
           </nav>
     </div>
-        
-    <h2>Tabs</h2>
+        <!--              tabs            -->
+
+
+        <h2>Tabs</h2>
     <div class="container">
-        <!-- NEED mt-5 justify-content-center  -->
+     
             
         <ul class="nav nav-pills mt-5 justify-content-center ">
             <li class="nav-item">
@@ -76,20 +78,27 @@
         <div class="container mt-4">
             <form>
                 <div class="row my-4">
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-3 col-12">
                         <input type="text" class="form-control" placeholder="First name" aria-label="First name">
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-3 col-12">
                         <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-3 col-12 text-start text-md-end">
+                        <label>Date of Birth:</label>
+                    </div>
+                
+                    <!-- Date of Birth Input -->
+                    <div class="col-md-3 col-12">
                         <div class="form-group">
-                            <label for="inputDOB" class="d-md-none">Date of Birth</label>
                             <input type="date" class="form-control" id="inputDOB">
                         </div>
                     </div>
                 </div>
-                <div class="row my-4">
+                
+                    
+                </div>
+                <div class="row mt-5 mb-4 ms-2" >
                     <div class="col-md-4 col-12">
                         <input type="text" class="form-control" placeholder="ID" aria-label="ID">
                     </div>
@@ -106,7 +115,7 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label for="inputLanguage">Language</label>
+                            <label for="inputLanguage">Language:</label>
                             <select id="inputLanguage" class="form-control">
                                 <option selected>Choose...</option>
                                 <option value="english">English</option>
@@ -116,10 +125,10 @@
                     </div>
                 </div>
         
-                <div class="row mb-4">
+                <div class="row ms-2 mb-5">
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="inputTestDate">Date of Test</label>
+                            <label for="inputTestDate">Date of Test:</label>
                             <input type="date" class="form-control" id="inputTestDate">
                         </div>
                     </div>
@@ -136,60 +145,61 @@
         <div class="form-group my-4 ">
             <label class=" ms-2 mb-3">Left Thresholds (Hz)</label>
             <div class="row">
-                <div class="col ms-4">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="500 Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="1K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="2K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="3K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="4K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="6K Hz">
                 </div>
-                <div class="col me-1">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="8K Hz">
                 </div>
             </div>
-        </text
+        </div>
         <div class="form-group mt-4">
             <label class="ms-2 my-3">Right Thresholds (Hz)</label>
             <div class="row">
-                <div class="col ms-4">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="500 Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="1K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="2K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="3K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="4K Hz">
                 </div>
-                <div class="col">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="6K Hz">
                 </div>
-                <div class="col me-1">
+                <div class="col-2 col-md">
                     <input type="text" class="form-control" placeholder="8K Hz">
                 </div>
             </div>
+            
         </div>
 
     </div>
                 
-            </form>
-        </div>
+    </form>
+</div>
     
 <div class="container">
     <div class="form-group row justify-content-end mt-5">
@@ -200,6 +210,7 @@
 </div>
             </form>
         </div>
+    <!-- SPACER --> 
     <div class="div" style=" height: 150px"></div>
 
         <!-- -------------------------------------------------   -->

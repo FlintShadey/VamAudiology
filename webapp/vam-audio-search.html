@@ -8,11 +8,11 @@
 </head>
 <body>
     
-
+<!-- --------------------------   NAV BAR --------------------------->
     <div class="container-fluid">
         <nav class="navbar row justify-content-around fixed-top" style="background-color: #e3f2fd;">
             <div class="container-fluid justify-content">
-                <a class="navbar-brand ps-3" href="#">
+                <a class="navbar-brand ps-3" href="landing-page.html">
                     <img src="/webapp/POD_LOGO_transparent.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-center">
                   </a>
                   <div class="justify-content-center">
@@ -28,21 +28,21 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">Future Link</a>
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       VAM Audiology Data
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Add Data</a></li>
+                      <li><a class="dropdown-item" href="vam-audio-add.html">Add Data</a></li>
                       <li><a class="dropdown-item" href="#">Search</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Download Entire dataset</a></li>
+                      <li><a class="dropdown-item" href="vam-audio-download.html">Download Entire dataset</a></li>
                     </ul>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link disabled" aria-disabled="true">LOGOUT</a>
+                    <a class="nav-link">LOGOUT</a>
                   </li>
                 </ul>
     
@@ -51,7 +51,8 @@
           </nav>
     </div>
         
-    <h2>Tabs</h2>
+    <!------------------ TABS ----------------------------->
+    <h2></h2>>
 <div class="container">
 <!-- NEED mt-5 justify-content-center  -->
     
@@ -60,37 +61,120 @@
       <a class="nav-link active" aria-current="page" href="#">Search</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Add Data</a>
+      <a class="nav-link" href="vam-audio-add.html">Add Data</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Download</a>
+      <a class="nav-link" href="vam-audio-download.html">Download</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link disabled" aria-disabled="true">Back</a>
+      <a class="nav-link" href ="landing-page.html">Back</a>
     </li>
   </ul>
 </div>
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-12 col-md">
-            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-        </div>
-        <div class="col-12 col-md">
-            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-        </div>
-        <div class="col-12 col-md">
-            <input type="date" class="form-control" placeholder="Date of Birth" aria-label="Date of Birth">
-        </div>
-    </div>        
+  <div class="row">
+      <div class="col-12 col-md">
+          <input type="text" class="form-control" id="firstNameInput" placeholder="First name" aria-label="First name">
+      </div>
+      <div class="col-12 col-md">
+          <input type="text" class="form-control" id="lastNameInput" placeholder="Last name" aria-label="Last name">
+      </div>
+      <div class="col-12 col-md">
+          <input type="date" class="form-control" id="dobInput" placeholder="Date of Birth" aria-label="Date of Birth">
+      </div>
+  </div>
 </div>
-
 
 <div class="container mt-5 d-flex justify-content-end">
-    <input class="btn btn-primary btn-lg" type="search" value="Search">
+  <button class="btn btn-primary btn-lg" onclick="searchData()">Search</button>
 </div>
+
+<div class="container mt-5">
+  <div id="searchResults"></div>
+</div>
+
+
+<div class="div" style="height: 250px"></div>
+
+<footer class="footeer bg-primary" data-bs-theme="dark" >
+    <div class="container">
+      <div class="d-flex justify-content-between">
+          <span class="text-muted"><i class="bi bi-c-circle"></i> 2023 J Flint Smith MD</span>
+          <a href="https://www.linkedin.com/in/flint-smith-a89211290">
+              <i class="bi bi-linkedin pe-5" style="font-size: 30px;"></i>
+          </a>
+      </div>
+  </div>
+  </footer>
+
         <!-- -------------------------------------------------   -->
 
         <script src="js/bootstrap.bundle.js"></script>
+        <script>
+          // Sample data (replace with your actual data)
+const database = [
+    { firstName: "John", lastName: "Doe", dob: "1990-01-15" },
+    { firstName: "Jane", lastName: "Smith", dob: "1985-08-22" },
+    { firstName: "Alice", lastName: "Johnson", dob: "1995-03-10" },
+    // Add more data
+];
+
+function searchData() {
+    const firstName = document.getElementById("firstNameInput").value.toLowerCase();
+    const lastName = document.getElementById("lastNameInput").value.toLowerCase();
+    const dob = document.getElementById("dobInput").value;
+
+    // Filter the data based on user input
+    const results = database.filter(entry => {
+        return (
+            entry.firstName.toLowerCase().includes(firstName) &&
+            entry.lastName.toLowerCase().includes(lastName) &&
+            (dob === "" || entry.dob === dob)
+        );
+    });
+
+    // Display the search results
+    displayResults(results);
+}
+
+function displayResults(results) {
+    const searchResults = document.getElementById("searchResults");
+    searchResults.innerHTML = "";
+
+    if (results.length === 0) {
+        searchResults.innerHTML = "<p>No results found.</p>";
+        return;
+    }
+
+    const table = document.createElement("table");
+    table.className = "table";
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    `;
+
+    const tbody = table.querySelector("tbody");
+    results.forEach(entry => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${entry.firstName}</td>
+            <td>${entry.lastName}</td>
+            <td>${entry.dob}</td>
+        `;
+        tbody.appendChild(row);
+    });
+
+    searchResults.appendChild(table);
+}
+
+        </script>
 </body>
 </html>

@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VAM ADD</title>
+    <title>tester</title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+      /* Style invalid inputs with red border */
+      input:invalid {
+          border-color:  red;
+          border-width: 2px;
+      }
+  
+      /* Style valid inputs with green border */
+      input:valid {
+          border-color: green;
+      }
+  </style>
 </head>
 <body>
     
@@ -75,96 +87,55 @@
         </div>
 
         <!--        FORM         -->
-        <div class="container mt-2">
-            <form>
-                <div class="row my-4">
-                    <div class="col-md-4 col-12">
-                        <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-                    </div>
-                    <div class="col-md-2 col-12 text-start text-md-end">
-                        <label>Date of Birth:</label>
-                    </div>
-                
-                    <!-- Date of Birth Input -->
-                    <div class="col-md-2 col-12">
-                        <div class="form-group">
-                            <input type="date" class="form-control" id="inputDOB">
-                        </div>
-                    </div>
-                </div>
-                
-                    
-                </div>
-                <div class="row mt-5 mb-4 mx-5" >
-                    <div class="col-md-4 col-12">
-                        <input type="text" class="form-control" placeholder="ID" aria-label="ID">
-                    </div>
-                    <div class="col-md-4 col-12 text-center">
-                        <label class="pe-3">Sex:</label>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sex" id="sexMale" value="male" checked>
-                            <label class="form-check-label" for="sexMale">Male</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="sex" id="sexFemale" value="female">
-                            <label class="form-check-label" for="sexFemale">Female</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label for="inputLanguage">Language:</label>
-                            <select id="inputLanguage" class="form-control">
-                                <option selected>Choose...</option>
-                                <option value="english">English</option>
-                                <option value="spanish">Spanish</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="row ms-2 mb-5">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for="inputTestDate">Date of Test:</label>
-                            <input type="date" class="form-control" id="inputTestDate">
-                        </div>
-                    </div>
-                </div>
-        
-               
-        
-            </form>
-        </div>
-        
-    <div class="container-fluid">
-
-       
-        <div class="form-group my-4 ">
-            <label class=" ms-2 mb-3">Left Thresholds (Hz)</label>
+        <div class="container mt-5">
+          <form>
+              <div class="row g-3" novalidate>
+                  <div class="col-md-4 col-12">
+                      <input type="text" class="form-control" placeholder="First name" aria-label="First name" required>
+                  </div>
+                  <div class="col-md-4 col-12">
+                      <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" required>
+                  </div>
+                  <div class="col-md-2 col-12 text-start text-md-end">
+                      <label for="inputDOB">Date of Birth:</label>
+                  </div>
+                  <div class="col-md-2 col-12">
+                      <div class="form-group">
+                          <input type="date" class="form-control" id="inputDOB" required>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <label for="inputID">ID Number:</label>
+                      <input type="text" class="form-control" id="inputID" placeholder="ID" aria-label="ID" required>
+                  </div>
+                  <div class="col-md-12 text-danger" id="validationMessage"></div>
+              </div>
+          </form>
+      </div>
+      <div class="container-fluid">
+        <div class="form-group my-4">
+            <label class="ms-2 mb-3">Left Thresholds (Hz)</label>
             <div class="row">
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="500 Hz">
+                    <input type="text" class="form-control custom-input" placeholder="500 Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="1K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="1K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="2K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="2K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="3K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="3K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="4K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="4K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="6K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="6K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="8K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="8K Hz" required>
                 </div>
             </div>
         </div>
@@ -172,45 +143,39 @@
             <label class="ms-2 my-3">Right Thresholds (Hz)</label>
             <div class="row">
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="500 Hz">
+                    <input type="text" class="form-control custom-input" placeholder="500 Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="1K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="1K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="2K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="2K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="3K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="3K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="4K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="4K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="6K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="6K Hz" required>
                 </div>
                 <div class="col-2 col-md">
-                    <input type="text" class="form-control" placeholder="8K Hz">
+                    <input type="text" class="form-control custom-input" placeholder="8K Hz" required>
                 </div>
             </div>
-            
         </div>
-
     </div>
-                
-    </form>
-</div>
     
-<div class="container">
-    <div class="form-group row justify-content-end mt-5">
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
-    </div>
-</div>
-            </form>
-        </div>
-    <!-- SPACER --> 
+        
+    <div class="container">
+      <div class="form-group row justify-content-end mt-5">
+          <div class="col-auto">
+              <button type="button" class="btn btn-primary btn-lg" id="submitButton">Submit</button>
+          </div>
+      </div>
+  </div>
+            <!-- SPACER --> 
     <div class="div" style="height: 250px"></div>
 
     <footer class="footeer bg-primary" data-bs-theme="dark" >
@@ -227,5 +192,22 @@
         <!-- -------------------------------------------------   -->
 
         <script src="js/bootstrap.bundle.js"></script>
+
+        <script>
+          const form = document.querySelector('form');
+          const submitButton = document.getElementById('submitButton');
+          
+          submitButton.addEventListener('click', function () {
+              if (form.checkValidity()) {
+                  // Form is valid, you can submit it here if needed.
+                  alert('Form is valid. Submitting...');
+              } else {
+                  // Form is not valid, show a warning message.
+                  alert('Please complete all fields.');
+              }
+          });
+      </script>
+
+
 </body>
 </html>

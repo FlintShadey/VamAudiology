@@ -1,20 +1,15 @@
 {% extends "base.html" %} {% block title %}{{title}}{% endblock %}{% block
-  head_extra %} 
-
-{% endblock head_extra %}
-
-{% block content %}
+head_extra %} {% endblock head_extra %} {% block content %}
 <!-----------------NAV - TABS ----------------------------->
-        
-    
+
 <div class="container">
-<ul class="nav nav-pills mt-5 justify-content-center">
+  <ul class="nav nav-pills mt-5 justify-content-center">
     <li class="nav-item">
-        <a class="nav-link" href="vam-audio-search.html">Search</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="vam-audio-add.html">Add Data</a>
-      </li>
+      <a class="nav-link" href="vam-audio-search.html">Search</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="vam-audio-add.html">Add Data</a>
+    </li>
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href="#">Dowload</a>
     </li>
@@ -28,33 +23,32 @@
 <div class="div" style="height: 100px"></div>
 
 <div class="container mt-5">
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary" id="downloadButton" type="button">Download VAM audiology data.csv</button>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button class="btn btn-primary" id="downloadButton" type="button">
+      Download VAM audiology data.csv
+    </button>
+  </div>
+</div>
 
-      </div>
-</div>  
+{% endblock content %}
+<!-- -------------------------------------------------   -->
 
-{% endblock content %} 
-        <!-- -------------------------------------------------   -->
+{% block scripts %}
 
-        {% block scripts %}
+<script>
+  document.getElementById("downloadButton").addEventListener("click", () => {
+    // Assuming the server script has generated the CSV file , i think i learn this in flask versus node.js
 
-        <script>
-          document.getElementById('downloadButton').addEventListener('click', () => {
-            // Assuming the server script has generated the CSV file , i think i learn this in flask versus node.js
-          
-            const csvFilePath = 'sampleData.csv';
+    const csvFilePath = "sampleData.csv";
 
-            // Create an anchor element to trigger the download
-            const a = document.createElement('a');
-            a.href = csvFilePath;
-            a.download = 'sampleData.csv';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-          });
-        </script>
+    // Create an anchor element to trigger the download
+    const a = document.createElement("a");
+    a.href = csvFilePath;
+    a.download = "sampleData.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  });
+</script>
 
-        {% endblock scripts %}
-
-        
+{% endblock scripts %}

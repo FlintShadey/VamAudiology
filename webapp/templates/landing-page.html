@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}{{title}}{% endblock %}{% block
+  head_extra %} {% endblock %} {% block content %}
+
+<div class="div" style="height: 100px"></div>
+
+<div class="container text-center text-md-start">
+    <button type="button" id ="vamAudiologyDataButton" class="btn btn-primary btn-lg mt-3 ">VAM Audiology Data</button>
+  </div>
+  <div class="container">
+    <button type="button" class="btn btn-tertiary btn-lg my-3 d-none d-md-block" disabled>Future Functionality</button>
+  </div>
+  <div class="container">
+    <button type="button" class="btn btn-tertiary btn-lg my-3 d-none d-md-block" disabled>Future Functionality</button>
+  </div>
+  <div class="container">
+    <button type="button" class="btn btn-tertiary btn-lg my-3 d-none d-md-block" disabled>Future Functionality</button>
+  </div>
+  {% endblock content %} {% block scripts %}
+    <script> 
+        document.getElementById("vamAudiologyDataButton").onclick = function() {
+            location.href="http://127.0.0.1:5500/webapp/vam-audio-search.html"};
+        
+
+
+    </script>
+   {% endblock scripts %}
+</body>
+</html>

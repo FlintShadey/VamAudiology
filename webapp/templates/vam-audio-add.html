@@ -1,0 +1,245 @@
+{% extends "base.html" %} {% block title %}{{title}}{% endblock %} {% block
+head_extra %}
+<style>
+  /* Style invalid inputs with red border */
+  input:invalid {
+    border-color: red;
+    border-width: 2px;
+  }
+
+  /* Style valid inputs with green border */
+  input:valid {
+    border-color: green;
+  }
+  /* Default font size for larger screens */
+.custom-input::placeholder {
+    font-size: 16px; /* Adjust as needed */
+}
+
+/* Smaller font size for smaller screens */
+@media (max-width: 576px) { /* Bootstrap's small breakpoint */
+    .custom-input::placeholder {
+        font-size: 13px; /* Adjust as needed for small screens */
+    }
+}
+
+</style>
+{% endblock head_extra %} {% block content %}
+<!-----------------NAV - TABS ----------------------------->
+<div class="container">
+  <ul class="nav nav-pills mt-3 justify-content-center">
+    <li class="nav-item">
+      <a class="nav-link" href="vam-audio-search.html">Search</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="#">Add Data</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="vam-audio-download.html">Download</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="landing-page.html">Back</a>
+    </li>
+  </ul>
+</div>
+
+<!--        FORM         -->
+<div class="container mt-5">
+  <form>
+    <div class="row g-3" novalidate>
+      <div class="col-md-4 col-12">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="First name"
+          aria-label="First name"
+          required
+        />
+      </div>
+      <div class="col-md-4 col-12">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Last name"
+          aria-label="Last name"
+          required
+        />
+      </div>
+      <div class="col-md-2 col-12 text-start text-md-end">
+        <label for="inputDOB">Date of Birth:</label>
+      </div>
+      <div class="col-md-2 col-12">
+        <div class="form-group">
+          <input type="date" class="form-control" id="inputDOB" required />
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputID">ID Number:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputID"
+          placeholder="ID"
+          aria-label="ID"
+          required
+        />
+      </div>
+      <div class="col-md-12 text-danger" id="validationMessage"></div>
+    </div>
+  </form>
+</div>
+<div class="container-fluid">
+  <div class="form-group my-4">
+    <label class="ms-2 mb-3">Left Thresholds (Hz)</label>
+    <div class="row">
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="500"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="1K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="2K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="3K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="4K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="6K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="8K"
+          required
+        />
+      </div>
+    </div>
+  </div>
+  <div class="form-group mt-4">
+    <label class="ms-2 my-3">Right Thresholds (Hz)</label>
+    <div class="row">
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="500"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="1K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="2K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="3K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="4K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="6K"
+          required
+        />
+      </div>
+      <div class="col col-md">
+        <input
+          type="text"
+          class="form-control custom-input"
+          placeholder="8K"
+          required
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="form-group row justify-content-end mt-5 mb-3">
+    <div class="col-auto">
+      <button type="button" class="btn btn-primary btn-lg" id="submitButton">
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+<!-- --------------------- validation alert----------------------------   -->
+
+{% block scripts %}
+<script>
+  const form = document.querySelector("form");
+  const submitButton = document.getElementById("submitButton");
+
+  submitButton.addEventListener("click", function () {
+    if (form.checkValidity()) {
+      // Form is valid, you can submit it here if needed.
+      alert("Form is valid. Submitting...");
+    } else {
+      // Form is not valid, show a warning message.
+      alert("Please complete all fields.");
+    }
+  });
+</script>
+{% endblock scripts%}

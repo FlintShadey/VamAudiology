@@ -8,16 +8,6 @@ app.config["SECRET_KEY"] = "ec58e0a02e7d66b29d3c063d5a7293b8"
 
 
 
-# @app.route('/', methods=['GET', 'POST'])
-# def login():
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         # Insert logic to verify the user's login credentials here
-#         flash('You have been logged in!', 'success')
-#         # Redirect to the dashboard or another page on successful login
-#         return redirect(url_for('/landing-page'))
-#     return render_template('login.html', title='Login', form=form)
-
 @app.route('/', methods=['GET', 'POST'])
 def login():
     form = LoginForm()

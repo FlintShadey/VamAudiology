@@ -1,0 +1,13 @@
+/yourapp
+    /static
+        /css
+        /js
+        /images
+    /templates
+        base.html
+        index.html
+        landing-page.html
+        ...
+    app.py
+    forms.py
+    config.py

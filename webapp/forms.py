@@ -1,42 +1,22 @@
-{% extends "layout.html" %}
-{% block content %}
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, Email, EqualTo
 
-       <div class = "content-section">
-            <form method = "POST" action = "">
-                {{form.hidden_tag() }}
-                <fieldset class ="form-group">
-                    <legend class = "border-bottom mb-4"> Join Now</legend>
-                    <div class = "form-group">
-                        {{ form.username.label(class="form-control-label") }}
-                        {{ form.username(class="form-control form-control-lg") }}
-                    </div>
-                    <div class = "form-group">
-                        {{ form.email.label(class="form-control-label") }}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    </div>
-                    <div class = "form-group">
-                        {{ form.password.label(class="form-control-label") }}
-                        {{ form.password(class="form-control form-control-lg") }}
-                    </div>
-                    <div class = "form-group">
-                        {{ form.confirm_password.label(class="form-control-label") }}
-                        {{ form.confirm_password(class="form-control form-control-lg") }}
-                    </div>
-                </fieldset>
-                <div class = "form-group">
-                    {{ form.submit(class="btn btn-outline-info")}}
-                </div>
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', 
+                            validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', 
+                            validators=[DataRequired(), Email()])
+    password = PasswordField('Password', 
+                            validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password', 
+                            validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Sign Up')
 
-            </form>
-
-       </div>
-       <div class = "border-top pt-3">
-            <small class = "text-muted">
-                Already have an account? <a class="ms-2" href = "{{ url_for('login')}}">Sign In</a>
-            </small>
-
-       </div>
-{% endblock content %}
-
-
-#what is causing the error?
+class LoginForm(FlaskForm):
+    email = StringField('Email', 
+                            validators=[DataRequired(), Email()])
+    password = PasswordField('Password', 
+                            validators=[DataRequired()])
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')

@@ -75,21 +75,64 @@
           {{ registration_form.hidden_tag() }}
           <div class="mb-3">
             {{ registration_form.username.label(class="form-label") }}
-            <!--       invalid logic here-->
+            
+            {% if registration_form.username.errors %}
+            {{ registration_form.username(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in registration_form.username.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
             {{ registration_form.username(class="form-control") }}
+            {% endif %}
           </div>
+
           <div class="mb-3">
             {{ registration_form.email.label(class="form-label") }}
+
+            {% if registration_form.email.errors %}
+            {{ registration_form.email(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in registration_form.email.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
             {{ registration_form.email(class="form-control") }}
+            {% endif %}
+
           </div>
           <div class="mb-3">
             {{ registration_form.password.label(class="form-label") }}
+
+            {% if registration_form.password.errors %}
+            {{ registration_form.password(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in registration_form.password.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
             {{ registration_form.password(class="form-control") }}
+            {% endif %}
           </div>
+
           <div class="mb-3">
             {{ registration_form.confirm_password.label(class="form-label") }}
+            <!--       invalid logic for confirm password-->
+            {% if registration_form.confirm_password.errors %}
+            {{ registration_form.confirm_password(class="form-control is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in registration_form.confirm_password.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
             {{ registration_form.confirm_password(class="form-control") }}
+            {% endif %}
           </div>
+
           {{ registration_form.submit(class="btn btn-primary") }}
         </form>
       </div>

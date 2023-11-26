@@ -1,3 +1,0 @@
-# In your RegistrationForm class in forms.py
-password = PasswordField('Password', validators=[DataRequired()], render_kw={"id": "signupPassword"})
-confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')], render_kw={"id": "signupPasswordConfirm"})

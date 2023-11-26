@@ -54,7 +54,10 @@
             {{ form.remember(class="form-check-input") }}
             {{ form.remember.label(class="form-check-label") }}
           </div>
-          {{ form.submit(class="btn btn-primary") }}
+
+          {{ form.login_submit(class="btn btn-primary") }}
+
+
         </form>
       </div>
     </div>
@@ -71,7 +74,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="post" action="{{ url_for('register') }}"> <!-- Add the route that handles registration -->
+  <!-- The route that handles registration -->
+          <form id="registrationForm" method="post" action="{{ url_for('register') }}">
+
           {{ registration_form.hidden_tag() }}
           <div class="mb-3">
             {{ registration_form.username.label(class="form-label") }}
@@ -87,22 +92,24 @@
             {{ registration_form.username(class="form-control") }}
             {% endif %}
           </div>
+        
 
           <div class="mb-3">
             {{ registration_form.email.label(class="form-label") }}
-
+        
             {% if registration_form.email.errors %}
-            {{ registration_form.email(class="form-control is-invalid") }}
-            <div class="invalid-feedback">
-              {% for error in registration_form.email.errors %}
-              <span>{{ error }}</span>
-              {% endfor %}
-            </div>
+                {{ registration_form.email(class="form-control is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in registration_form.email.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
             {% else %}
-            {{ registration_form.email(class="form-control") }}
+                {{ registration_form.email(class="form-control") }}
+                <div id="email-error" class="invalid-feedback invalid-tooltip"></div> <!-- Error display element for AJAX -->
             {% endif %}
-
-          </div>
+        </div>
+        
           <div class="mb-3">
             {{ registration_form.password.label(class="form-label") }}
 
@@ -132,8 +139,7 @@
             {{ registration_form.confirm_password(class="form-control") }}
             {% endif %}
           </div>
-
-          {{ registration_form.submit(class="btn btn-primary") }}
+          {{ registration_form.register_submit(class="btn btn-primary") }}
         </form>
       </div>
     </div>
@@ -146,18 +152,41 @@
     
     {% endblock content %} {% block scripts %}
     
-    <script>
-      document
-        .getElementById("signupForm")
-        .addEventListener("submit", function (event) {
-          var password = document.getElementById("signupPassword").value;
-          var confirmPassword = document.getElementById("signupPasswordConfirm").value;
-    
-          if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            event.preventDefault(); // Prevent form submission
+
+    <!-- AJAX for login -->
+<script>
+  document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent normal form submission
+  
+      var formData = new FormData(this);
+  
+      fetch('{{ url_for("register") }}', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              // Redirect to the landing page on successful registration
+              window.location.href = "{{ url_for('landing_page') }}";
+          } else {
+              // Display errors on the modal
+              Object.keys(data.errors).forEach(function(field) {
+                  var message = data.errors[field].join(' ');
+                  // Display these error messages near the respective form fields
+                  var fieldElement = document.querySelector('#registrationForm [name="' + field + '"]');
+                  fieldElement.classList.add('is-invalid');
+                  var errorElementId = field + '-error';
+                  var errorElement = document.getElementById(errorElementId);
+                  if (errorElement) {
+                      errorElement.textContent = message;
+                  }
+              });
           }
-        });
-    </script>
+      });
+  });
+</script>
+
+      
     {% endblock scripts %}
     

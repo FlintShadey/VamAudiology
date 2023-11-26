@@ -154,23 +154,21 @@
     
 
     <!-- AJAX for login -->
-<script>
-  document.getElementById('registrationForm').addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent normal form submission
-  
-      var formData = new FormData(this);
-  
-      fetch('{{ url_for("register") }}', {
-          method: 'POST',
-          body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.success) {
-              // Redirect to the landing page on successful registration
-              window.location.href = "{{ url_for('landing_page') }}";
-          } else {
-              // Display errors on the modal
+    <script>
+      document.getElementById('registrationForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent normal form submission
+          var formData = new FormData(this);
+          fetch('{{ url_for("register") }}', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  // Redirect to the landing page with a query parameter
+                  window.location.href = "{{ url_for('landing_page') }}?registered=true";
+              } else {
+                  // Display errors on the modal
               Object.keys(data.errors).forEach(function(field) {
                   var message = data.errors[field].join(' ');
                   // Display these error messages near the respective form fields

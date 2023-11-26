@@ -33,7 +33,7 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         # Registration logic goes here...
-        return jsonify(success=True)
+        return jsonify(success=True, message="Your account has been created! You are now able to log in")
     else:
         # Return validation errors
         return jsonify(success=False, errors=form.errors), 400
@@ -41,7 +41,11 @@ def register():
 
 @app.route("/landing-page")
 def landing_page():
+    # Check if 'registered' parameter is in the query string
+    if 'registered' in request.args:
+        flash("Your account has been created! You are now able to log in", "success")
     return render_template("landing-page.html", title="Home")
+
 
 
 @app.route("/vam-audio-add")

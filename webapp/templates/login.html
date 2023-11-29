@@ -48,8 +48,8 @@ head_extra %} {% endblock %} {% block content %}
         ></button>
       </div>
       <div class="modal-body">
-        <form method="post" action="{{ url_for('login') }}">
-          <!-- Add the route that handles login -->
+        <form id="loginForm" method="post" action="{{ url_for('login') }}">
+          <!------------------login MODAL --------------->
           {{ login_form.hidden_tag() }}
           <div class="mb-3">
             {{ login_form.email.label(class="form-label") }} {% if
@@ -224,6 +224,38 @@ head_extra %} {% endblock %} {% block content %}
               // Display these error messages near the respective form fields
               var fieldElement = document.querySelector(
                 '#registrationForm [name="' + field + '"]'
+              );
+              fieldElement.classList.add("is-invalid");
+              var errorElementId = field + "-error";
+              var errorElement = document.getElementById(errorElementId);
+              if (errorElement) {
+                errorElement.textContent = message;
+              }
+            });
+          }
+        });
+    });
+document
+    .getElementById("loginForm") // replace "loginForm" with the actual id of your login form
+    .addEventListener("submit", function (event) {
+      event.preventDefault(); // Prevent normal form submission
+      var formData = new FormData(this);
+      fetch('{{ url_for("login") }}', {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            // Redirect to the landing page
+            window.location.href = "{{ url_for('landing_page') }}";
+          } else {
+            // Display errors on the modal
+            Object.keys(data.errors).forEach(function (field) {
+              var message = data.errors[field].join(" ");
+              // Display these error messages near the respective form fields
+              var fieldElement = document.querySelector(
+                '#loginForm [name="' + field + '"]' // replace "loginForm" with the actual id of your login form
               );
               fieldElement.classList.add("is-invalid");
               var errorElementId = field + "-error";

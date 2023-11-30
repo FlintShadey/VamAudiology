@@ -29,28 +29,20 @@ head_extra %} {% endblock %} {% block content %}
 </div>
 
 <!-- Login Modal -->
-<div
-  class="modal fade"
-  id="loginModal"
-  tabindex="-1"
-  aria-labelledby="loginModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="loginModalLabel">Login</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form id="loginForm" method="post" action="{{ url_for('login') }}">
-          <!------------------login MODAL --------------->
+        <!-- <form id="loginForm" method="post" action="{{ url_for('home') }}">
+          {{ login_form.hidden_tag() }} -->
+        <form method="POST" action="{{ url_for('home') }}">
           {{ login_form.hidden_tag() }}
+          {{ login_form.csrf_token(id='csrf_token_login') }}
+
           <div class="mb-3">
             {{ login_form.email.label(class="form-label") }} {% if
             login_form.email.errors %} {{ login_form.email(class="form-control
@@ -65,7 +57,6 @@ head_extra %} {% endblock %} {% block content %}
               id="email-error"
               class="invalid-feedback invalid-tooltip"
             ></div>
-            <!-- Error display element for AJAX -->
             {% endif %}
           </div>
           <div class="mb-3">
@@ -85,8 +76,8 @@ head_extra %} {% endblock %} {% block content %}
             {{ login_form.remember(class="form-check-input") }}
             {{ login_form.remember.label(class="form-check-label") }}
           </div>
-
-          {{ login_form.submit(class="btn btn-primary") }}
+          <input type="submit" name="login_submit" class="btn btn-primary" value="Log In">
+        </form>
 
           <small class="text-muted ms-2">
             <a href="#">Forgot Password?</a>
@@ -103,33 +94,19 @@ head_extra %} {% endblock %} {% block content %}
   </div>
 </div>
 
-<!-- Registration Modal -->
-<div
-  class="modal fade"
-  id="registrationModal"
-  tabindex="-1"
-  aria-labelledby="registrationModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="registrationModalLabel">Sign Up</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <!-- The route that handles registration -->
-        <form
-          id="registrationForm"
-          method="post"
-          action="{{ url_for('register') }}"
-        >
-          {{ registration_form.hidden_tag() }}
+  <!-- Registration Modal -->
+  <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registrationModalLabel">Sign Up</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- The route that handles registration -->
+          <form id="registrationForm" method="post" action="{{ url_for('home') }}">
+            {{ registration_form.hidden_tag() }}
+            {{ registration_form.csrf_token(id='csrf_token_register') }}
           <div class="mb-3">
             {{ registration_form.username.label(class="form-label") }} {% if
             registration_form.username.errors %} {{
@@ -154,7 +131,7 @@ head_extra %} {% endblock %} {% block content %}
             </div>
             {% else %} {{ registration_form.email(class="form-control") }}
             <div
-              id="email-error"
+              id="registration_email-error"
               class="invalid-feedback invalid-tooltip"
             ></div>
             <!-- Error display element for AJAX -->
@@ -176,7 +153,7 @@ head_extra %} {% endblock %} {% block content %}
 
           <div class="mb-3">
             {{ registration_form.confirm_password.label(class="form-label") }}
-            <!--       invalid logic for confirm password-->
+          
             {% if registration_form.confirm_password.errors %} {{
             registration_form.confirm_password(class="form-control is-invalid")
             }}
@@ -189,7 +166,7 @@ head_extra %} {% endblock %} {% block content %}
             registration_form.confirm_password(class="form-control") }} {% endif
             %}
           </div>
-          {{ registration_form.register_submit(class="btn btn-primary") }}
+          <input type="submit" name="register_submit" value="Register" class ="btn btn-primary">
         </form>
       </div>
     </div>
@@ -199,74 +176,5 @@ head_extra %} {% endblock %} {% block content %}
 <div class="div" style="height: 250px"></div>
 
 {% endblock content %} {% block scripts %}
-
-<!-- AJAX for login -->
-<script>
-  document
-    .getElementById("registrationForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent normal form submission
-      var formData = new FormData(this);
-      fetch('{{ url_for("register") }}', {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            // Redirect to the landing page with a query parameter
-            window.location.href =
-              "{{ url_for('landing_page') }}?registered=true";
-          } else {
-            // Display errors on the modal
-            Object.keys(data.errors).forEach(function (field) {
-              var message = data.errors[field].join(" ");
-              // Display these error messages near the respective form fields
-              var fieldElement = document.querySelector(
-                '#registrationForm [name="' + field + '"]'
-              );
-              fieldElement.classList.add("is-invalid");
-              var errorElementId = field + "-error";
-              var errorElement = document.getElementById(errorElementId);
-              if (errorElement) {
-                errorElement.textContent = message;
-              }
-            });
-          }
-        });
-    });
-document
-    .getElementById("loginForm") // replace "loginForm" with the actual id of your login form
-    .addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent normal form submission
-      var formData = new FormData(this);
-      fetch('{{ url_for("login") }}', {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            // Redirect to the landing page
-            window.location.href = "{{ url_for('landing_page') }}";
-          } else {
-            // Display errors on the modal
-            Object.keys(data.errors).forEach(function (field) {
-              var message = data.errors[field].join(" ");
-              // Display these error messages near the respective form fields
-              var fieldElement = document.querySelector(
-                '#loginForm [name="' + field + '"]' // replace "loginForm" with the actual id of your login form
-              );
-              fieldElement.classList.add("is-invalid");
-              var errorElementId = field + "-error";
-              var errorElement = document.getElementById(errorElementId);
-              if (errorElement) {
-                errorElement.textContent = message;
-              }
-            });
-          }
-        });
-    });
-</script>
 
 {% endblock scripts %}

@@ -31,17 +31,17 @@ head_extra %}
 <div class="container">
   <ul class="nav nav-pills mt-3 justify-content-center">
     <li class="nav-item">
-      <a class="nav-link" href="vam-audio-search.html">Search</a>
+      <a class="nav-link" href="{{ url_for('vam_audio_search') }}">Search</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href="#">Add Data</a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="vam-audio-download.html">Download</a>
+      <a class="nav-link" href="{{ url_for('vam_audio_download') }}">Download</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="landing-page.html">Back</a>
+      <a class="nav-link" href="{{ url_for('landing_page') }}">Back</a>
     </li>
   </ul>
 </div>

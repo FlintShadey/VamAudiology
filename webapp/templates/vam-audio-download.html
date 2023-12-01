@@ -5,17 +5,17 @@ head_extra %} {% endblock head_extra %} {% block content %}
 <div class="container">
   <ul class="nav nav-pills mt-5 justify-content-center">
     <li class="nav-item">
-      <a class="nav-link" href="vam-audio-search.html">Search</a>
+      <a class="nav-link" href="{{ url_for('vam_audio_search') }}">Search</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="vam-audio-add.html">Add Data</a>
+      <a class="nav-link" href="{{ url_for('vam_audio_add') }}">Add Data</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active" aria-current="page" href="#">Dowload</a>
     </li>
 
     <li class="nav-item">
-      <a class="nav-link" href="landing-page.html">Back</a>
+      <a class="nav-link" href="{{ url_for('landing_page') }}">Back</a>
     </li>
   </ul>
 </div>
